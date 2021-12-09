@@ -1,0 +1,86 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+@import url('https://fonts.googleapis.com/css2?family=Damion&display=swap');
+
+* {font-family: 'Pretendard';}
+.sr-only {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+body {
+    display: flex;
+    margin: 0 auto;
+    width: 90vw;
+    align-items: center;
+    flex-direction: column;
+}
+header {
+    padding: 50px 0;
+    font-size: 5em;
+    line-height: 0.93em;
+    font-weight: bold;
+    letter-spacing: -3px;
+}
+header span{
+    font-family: 'Damion';
+    font-size: 1em;
+}
+
+/* nav */
+.dateList {
+    padding: 0;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+/* formbox */
+.formBox {
+    margin: 40px 0;
+}
+.formBox h3 {
+    font-size: 1.4em;
+    text-align: center;
+}
+.formBox .input-field {
+    border: none;
+    border-bottom: 3px solid #000;
+    font-size: 1.01em;
+    margin: 3px;
+    width: 160px;
+}
+.formBox .inputSubmit,
+.menu-remove-button,
+.menu-edit-button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    border: 1px solid #000;
+    border-radius: 13px;
+}
+
+/* itemlist */
+#itemList {
+    list-style: none;
+    padding: 1px 5px;
+}
+#itemList .itemListProduct {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#itemList .itemListProduct:first-child {
+    margin-top: 12px;
+}
+#itemList .itemListProduct .itemListName {
+    width: 50%;
+    text-align: left;
+}
+

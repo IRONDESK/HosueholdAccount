@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 가계부</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- 💰 -->
+    <header>
+        <span>Simple</span><br>
+        Household<br>
+        Account
+    </header>
+    <main>
+        <nav>
+            <ul class="dateList">
+                <li id="yesterday">yesterday</li>
+                <li id="today">today</li>
+                <li id="tommorrow">tommorrow</li>
+            </ul>
+        </nav>
+        <section>
+            <article class="formBox">
+                <h3>💰<span class="allMoney">show me the money</span>💰</h3>
+                <form id="itemForm">
+                    <label for="item-name" class="sr-only">소비 항목을 입력하세요.</label>
+                    <input type="text" id="item-name" name="itemName" class="input-field" placeholder="item"
+                        autocomplete="off" />
+                    <input type="number" id="item-price" name="itemPrice" class="input-field" placeholder="price"
+                        autocomplete="off" />
+                    <button type="button" name="submit" id="itemSubmitButton" class="inputSubmit">
+                        submit
+                    </button>
+                </form>
+
+                <ul id="itemList">
+                </ul>
+            </article>
+        </section>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
