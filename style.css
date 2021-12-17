@@ -38,6 +38,10 @@ header span{
     flex-direction: row;
     justify-content: space-around;
 }
+.dateList li {
+    flex: 1;
+    text-align: center;
+}
 
 
 /* formbox */
@@ -55,7 +59,13 @@ header span{
     margin: 3px;
     width: 160px;
 }
-.formBox .inputSubmit,
+.formBox .inputSubmit {
+    cursor: pointer;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    border-radius: 13px;
+}
 .menu-remove-button,
 .menu-edit-button {
     cursor: pointer;
@@ -63,6 +73,7 @@ header span{
     background: none;
     border: 1px solid #000;
     border-radius: 13px;
+    box-sizing: border-box;
 }
 
 /* itemlist */
@@ -70,17 +81,28 @@ header span{
     list-style: none;
     padding: 1px 5px;
 }
-#itemList .itemListProduct {
+.itemListProduct {
     margin-top: 22px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
-#itemList .itemListProduct:first-child {
+.itemListProduct:first-child {
     margin-top: 12px;
 }
-#itemList .itemListProduct .itemListName {
-    width: 50%;
+.itemListProduct .itemListName {
+    flex: 2;
     text-align: left;
+}
+.itemListProduct .itemListPrice {
+    flex: 1;
+    text-align: right;
+    padding-right: 7px;
+}
+.itemListProduct .menu-edit-button,
+.itemListProduct .menu-remove-button {
+    flex: 0.2;
+    text-align: center;
+    margin-left: 3px;
 }
 

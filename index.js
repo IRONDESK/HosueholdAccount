@@ -3,19 +3,45 @@ const $ = (selector) => document.querySelector(selector)
 // $를 변수로 선언하여 활용
 
 function App() {
+
+    function getDate () {
+        const dateText = document.querySelector(".date-text");
+        let today = new Date();
+        const dayArray = ["일", "월", "화", "수", "목", "금", "토"]
+        dateText.innerText = `${today.getMonth() + 1}월 ${today.getDate()}일 ${dayArray[today.getDay()]}요일 소식입니다`;
+    }
+    
+    // data 스토리지
+    this.menu = {
+        twodaysago: [],
+        yesterday: [],
+        today: [],
+    };
+    this.currentDay = "today";
+
+      // store 저장값 불러오기
+    this.init = () => {
+        if (store.getLocalStorage()) {
+        this.menu = store.getLocalStorage();
+        }
+        menuRender();
+    }
+
+
     // 전체 금액 알아오기
-    // const getAllPrice = () => {
-    //     const getItemList = $("itemList");
-    //     const allItemPrice = getItemList.querySelectorAll(".itemListPrice").innerText;
-    //     console.log(allItemPrice);
-    //     $('allMoney').innerText(allItemPrice);
+    const getAllPrice = () => {
+        let allPrice = 0;
+        const allItemPrice = document.querySelectorAll(".itemListPrice");
+        for (let i = 0; i < allItemPrice.length; i ++) {
+            allPrice += parseInt(allItemPrice[i].innerText); 
+        }
+        $('#allMoney').innerText = `You spend ${allPrice} WON!`;
         
-    // }
+    }
 
 
 
-    // 버튼을 누르거나, 엔터를 누르거나 반복되는 코드이므로
-    // 하나의 변수로 받아서 각각에 넣어줌 
+    // 아이템 추가
     const addItem2List = () => {
         if ($("#item-name").value === "" || $("#item-price").value === "") {
             alert('값을 입력해주세요.');
@@ -37,13 +63,6 @@ function App() {
     </button>
 </li>`
         };
-        // .innerHTML,Text = ?? 로 쓰면 안의 내용을 바꾸는 것이기 때문에
-        // ul 태그 안에 계속 추가하려면,
-        // insertAdjacentHTML("", ??); 형태로 써야 한다.
-        // 태그의 앞부터 쓰려면 beforebegin
-        // 태그의 안에서 위로 추가하려면 afterbegin
-        // 태그의 안에서 아래로 추가하면 beforeend
-        // 태그의 뒤부터 쓰려면 afterend
         $("#itemList").insertAdjacentHTML(
             "beforeend", ListTemplate(itemName, itemPrice)
         );
@@ -72,6 +91,40 @@ function App() {
         });
 
 
+    // 메뉴 수정 및 삭제
+  $(".itemListProduct").addEventListener("click", (e) => {
+    if (e.target.classList.contains("menu-edit-button")) {
+      updateMenuName(e);
+    }
+
+    if (e.target.classList.contains("menu-remove-button")) {
+      RemoveMenuName(e);
+    }
+  });
+
+    // 아이템 수정 하기 
+  const updateMenuName = (e) => {
+    const dateMenu = e.target.closest("li").dataset.date;
+    const $itemName = e.target.closest("span").querySelector(".itemListName");
+    const $itemPrcie = e.target.closest("span").querySelector(".itemListPrice");
+    const updatedName = prompt("수정할 품목명을 입력해주세요.", $itemName.innerText);
+    const updatedPrice = prompt("수정할 메뉴명을 입력해주세요.", $itemPrcie.innerText);
+
+    this.menu[this.currentCategory][menuId].name = updatedMenuName;
+    store.setLocalStorage(this.menu);
+    $menuName.innerText = updatedMenuName;
+  };
+
+  // 아이템 삭제 하기
+  const RemoveMenuName = (e) => {
+    if ( confirm("삭제하시겠습니까?") ) {
+      const menuId = e.target.closest("li").dataset.menuId;
+      this.menu[this.currentCategory].splice(menuId, 1); // splice() : menuId번째 index를 1개 제거
+    store.setLocalStorage(this.menu);
+    e.target.closest("li").remove();
+    updateMenuCount();
+    }
+  };
     
 }
 
