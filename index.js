@@ -5,17 +5,16 @@ const $ = (selector) => document.querySelector(selector)
 function App() {
 
     function getDate () {
-        const dateText = document.querySelector(".date-text");
+        const todayText = document.querySelector("#today-text");
         let today = new Date();
-        const dayArray = ["일", "월", "화", "수", "목", "금", "토"]
-        dateText.innerText = `${today.getMonth() + 1}월 ${today.getDate()}일 ${dayArray[today.getDay()]}요일 소식입니다`;
+        const dayArray = ["S", "M", "T", "W", "TH", "F", "SA"]
+        todayText.innerText = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()}. ${dayArray[today.getDay()]}`;
+        return `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`;
     }
-    
+    console.log(getDate ())
+
     // data 스토리지
     this.menu = {
-        twodaysago: [],
-        yesterday: [],
-        today: [],
     };
     this.currentDay = "today";
 
@@ -92,7 +91,7 @@ function App() {
 
 
     // 메뉴 수정 및 삭제
-  $(".itemListProduct").addEventListener("click", (e) => {
+  $("#itemList").addEventListener("click", (e) => {
     if (e.target.classList.contains("menu-edit-button")) {
       updateMenuName(e);
     }
@@ -104,13 +103,13 @@ function App() {
 
     // 아이템 수정 하기 
   const updateMenuName = (e) => {
-    const dateMenu = e.target.closest("li").dataset.date;
-    const $itemName = e.target.closest("span").querySelector(".itemListName");
-    const $itemPrcie = e.target.closest("span").querySelector(".itemListPrice");
+    const $itemName = e.target.previousElementSibling.previousElementSibling;
+    const $itemPrcie = e.target.previousElementSibling;
     const updatedName = prompt("수정할 품목명을 입력해주세요.", $itemName.innerText);
     const updatedPrice = prompt("수정할 메뉴명을 입력해주세요.", $itemPrcie.innerText);
 
-    this.menu[this.currentCategory][menuId].name = updatedMenuName;
+    this.menu[this.currentCategory][menuId].name = updatedName;
+    this.menu[this.currentCategory][menuId].name = updatedName;
     store.setLocalStorage(this.menu);
     $menuName.innerText = updatedMenuName;
   };

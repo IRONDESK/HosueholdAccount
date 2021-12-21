@@ -31,6 +31,22 @@ header span{
 }
 
 /* nav */
+.prev-modal-btn {
+    cursor: pointer;
+    padding-right: 5px;
+    font-weight: 500;
+    font-size: 1em;
+}
+.prev-modal-btn:hover {
+    color: rgb(16, 0, 48);
+    opacity: 60%;
+}
+#today-text {
+    display: inline;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1em;
+}
 .dateList {
     padding: 0;
     display: flex;
