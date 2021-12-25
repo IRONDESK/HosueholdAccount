@@ -11,17 +11,23 @@
 
 <body>
     <!-- 💰 -->
-    <header>
+    <header class="title">
         <span>Simple</span><br>
         Household<br>
         Account
     </header>
     <main>
-        <nav>
-            <a class="prev-modal-btn">◀</a>
-            <article id="today-text"></article>
-        </nav>
-        <section>
+        <article class="date-text"></article>
+        <main>
+            <article class="modal">
+                <header class="modal-title">
+                    <h1>Previous Spend</h1>
+                    <a id="modal-close">
+                        <span></span>
+                        <span></span>
+                    </a>
+                </header>
+            </article>
             <article class="formBox">
                 <h3>💰<span id="allMoney">show me the money</span>💰</h3>
                 <form id="itemForm">
@@ -38,10 +44,10 @@
                 <ul id="itemList">
                 </ul>
             </article>
-        </section>
+        </ㅇ>
     </main>
 
-    <script src="index.js"></script>
+    <script src="index.js" type="module"></script>
 </body>
 
 </html>
