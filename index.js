@@ -17,7 +17,7 @@ function App() {
   };
 
   // data 스토리지
-  this.itemarray = {
+  this.myItemList = {
     date: [],
     menuname: [],
     price: [],
@@ -26,17 +26,17 @@ function App() {
 
   // data 초기값 셋팅
   const makeNewArray = () => {
-    if (this.itemarray.date.indexOf(this.currentDay) == -1) {
-      this.itemarray.date.push(getDate());
-      this.itemarray.menuname.push([]);
-      this.itemarray.price.push([]);
+    if (this.myItemList.date.indexOf(this.currentDay) == -1) {
+      this.myItemList.date.push(getDate());
+      this.myItemList.menuname.push([]);
+      this.myItemList.price.push([]);
     }
   };
 
   // store 저장값 불러오기
   this.init = () => {
     if (store.getLocalStorage()) {
-      this.itemarray = store.getLocalStorage();
+      this.myItemList = store.getLocalStorage();
     }
     rendering();
   };
@@ -71,13 +71,13 @@ function App() {
 
   // 렌더링
   const rendering = () => {
-    const currentDayIndex = this.itemarray.date.indexOf(this.currentDay);
-    const ListTemplate = this.itemarray.menuname[currentDayIndex]
+    const currentDayIndex = this.myItemList.date.indexOf(this.currentDay);
+    const ListTemplate = this.myItemList.menuname[currentDayIndex]
       .map((val, index) => {
         return `
   <li data-menu-id="${index}" class="itemListProduct">
     <span class="itemListName">${val}</span>
-    <span class="itemListPrice">${this.itemarray.price[currentDayIndex][index]}</span>
+    <span class="itemListPrice">${this.myItemList.price[currentDayIndex][index]}</span>
     <button type="button" class="menu-edit-button">
         edit
     </button>
@@ -98,7 +98,7 @@ function App() {
 
   // 아이템 수정 하기
   const updateMenuName = (e) => {
-    const currentDayIndex = this.itemarray.date.indexOf(this.currentDay);
+    const currentDayIndex = this.myItemList.date.indexOf(this.currentDay);
     const $itemName = e.target.previousElementSibling.previousElementSibling;
     const $itemPrcie = e.target.previousElementSibling;
     const menuId = e.target.closest("li").dataset.menuId;
@@ -111,9 +111,9 @@ function App() {
       $itemPrcie.innerText
     );
 
-    this.itemarray.menuname[currentDayIndex][menuId] = updatedName;
-    this.itemarray.price[currentDayIndex][menuId] = updatedPrice;
-    store.setLocalStorage(this.itemarray);
+    this.myItemList.menuname[currentDayIndex][menuId] = updatedName;
+    this.myItemList.price[currentDayIndex][menuId] = updatedPrice;
+    store.setLocalStorage(this.myItemList);
     $itemName.innerText = updatedName;
     $itemPrcie.innerText = updatedPrice;
     getAllPrice();
@@ -122,11 +122,11 @@ function App() {
   // 아이템 삭제 하기
   const RemoveMenuName = (e) => {
     if (confirm("삭제하시겠습니까?")) {
-      const currentDayIndex = this.itemarray.date.indexOf(this.currentDay);
+      const currentDayIndex = this.myItemList.date.indexOf(this.currentDay);
       const menuId = e.target.closest("li").dataset.menuId;
-      this.itemarray.menuname[currentDayIndex].splice(menuId, 1); // splice() : menuId번째 index를 1개 제거
-      this.itemarray.price[currentDayIndex].splice(menuId, 1); // splice() : menuId번째 index를 1개 제거
-      store.setLocalStorage(this.itemarray);
+      this.myItemList.menuname[currentDayIndex].splice(menuId, 1); // splice() : menuId번째 index를 1개 제거
+      this.myItemList.price[currentDayIndex].splice(menuId, 1); // splice() : menuId번째 index를 1개 제거
+      store.setLocalStorage(this.myItemList);
       e.target.closest("li").remove();
       getAllPrice();
     }
@@ -163,12 +163,12 @@ function App() {
       return;
     }
     // .value를 붙여서 input의 값을 가져옴
-    const currentDayIndex = this.itemarray.date.indexOf(this.currentDay);
+    const currentDayIndex = this.myItemList.date.indexOf(this.currentDay);
     const ItemName = $("#item-name").value;
     const ItemPrice = $("#item-price").value;
-    this.itemarray.menuname[currentDayIndex].push(ItemName);
-    this.itemarray.price[currentDayIndex].push(ItemPrice);
-    store.setLocalStorage(this.itemarray); // store에 저장
+    this.myItemList.menuname[currentDayIndex].push(ItemName);
+    this.myItemList.price[currentDayIndex].push(ItemPrice);
+    store.setLocalStorage(this.myItemList); // store에 저장
     rendering();
     // 추가 완료 했으면 input은 빈값
     $("#menu-name").value = "";
